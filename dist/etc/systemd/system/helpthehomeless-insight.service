@@ -1,10 +1,10 @@
 # Pre-req
-# sudo adduser dashpay --home /opt/dashpay
-# sudo mkdir -p /opt/dashpay/var/
-# sudo chown -R dashpay:dashpay /opt/dashpay/
+# sudo adduser helpthehomeless --home /opt/helpthehomeless
+# sudo mkdir -p /opt/helpthehomeless/var/
+# sudo chown -R helpthehomeless:helpthehomeless /opt/helpthehomeless/
 
 [Unit]
-Description=Dash Insight API
+Description=HTH Insight API
 Documentation=https://github.com/dashevo/insight-api-dash
 After=network-online.target
 Wants=network-online.target systemd-networkd-wait-online.service
@@ -19,22 +19,22 @@ StartLimitBurst=3
 
 # User and group the process will run as
 # (git is the de facto standard on most systems)
-User=dashpay
-Group=dashpay
+User=helpthehomeless
+Group=helpthehomeless
 
-WorkingDirectory=/opt/dashpay
-# custom directory cannot be set and will be the place where dashpay exists, not the working directory
-Environment="LD_LIBRARY_PATH=/opt/dashpay/lib"
-Environment="PKG_CONFIG_PATH=/opt/dashpay/lib/pkgconfig"
-ExecStart=/opt/dashpay/bin/node /opt/dashpay/bitcore/bin/bitcore-node-dash start -c /opt/dashpay/etc/
+WorkingDirectory=/opt/helpthehomeless
+# custom directory cannot be set and will be the place where helpthehomeless exists, not the working directory
+Environment="LD_LIBRARY_PATH=/opt/helpthehomeless/lib"
+Environment="PKG_CONFIG_PATH=/opt/helpthehomeless/lib/pkgconfig"
+ExecStart=/opt/helpthehomeless/bin/node /opt/helpthehomeless/bitcore/bin/bitcore-node-dash start -c /opt/helpthehomeless/etc/
 ExecReload=/bin/kill -USR1 $MAINPID
 
 # Limit the number of file descriptors and processes; see `man systemd.exec` for more limit settings.
-# Unmodified dashpay is not expected to use more than this.
+# Unmodified helpthehomeless is not expected to use more than this.
 LimitNOFILE=1048576
 LimitNPROC=64
 
-# Use private /tmp and /var/tmp, which are discarded after dashpay stops.
+# Use private /tmp and /var/tmp, which are discarded after helpthehomeless stops.
 PrivateTmp=true
 # Use a minimal /dev
 PrivateDevices=true
@@ -42,14 +42,14 @@ PrivateDevices=true
 ProtectHome=true
 # Make /usr, /boot, /etc and possibly some more folders read-only.
 ProtectSystem=full
-# ... except /opt/dashpay because we want a place for the database
-# and /opt/dashpay/bin/dashd because we want a place where logs can go.
+# ... except /opt/helpthehomeless because we want a place for the database
+# and /opt/helpthehomeless/bin/helpthehomelessd because we want a place where logs can go.
 # This merely retains r/w access rights, it does not add any new.
 # Must still be writable on the host!
-ReadWriteDirectories=/opt/dashpay
+ReadWriteDirectories=/opt/helpthehomeless
 
 # Note: in v231 and above ReadWritePaths has been renamed to ReadWriteDirectories
-; ReadWritePaths=/opt/dashpay
+; ReadWritePaths=/opt/helpthehomeless
 
 # The following additional security directives only work with systemd v229 or later.
 # They further retrict privileges that can be gained by dashpay.
