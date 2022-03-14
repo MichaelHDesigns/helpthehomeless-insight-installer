@@ -54,7 +54,7 @@ popd
 
 sudo rsync -av ./bitcore-node-dash.json $dash_prefix/etc/
 sudo chown -R helpthehomeless:helpthehomeless $helpthehomeless_prefix/
-sudo rsync -av ./dist/etc/systemd/system/dash-insight.service /etc/systemd/system/
+sudo rsync -av ./dist/etc/systemd/system/helpthehomeless-insight.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable dash-insight
 sudo systemctl start dash-insight
